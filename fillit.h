@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 15:21:45 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/05 19:27:23 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/06 15:21:47 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,8 +33,10 @@ typedef struct		s_fillit
 {
 	char				*first[19];
 	char				*second[19];
+	char				*carre;
 	t_ptr				*begin_lst;
 	char				*tmp;
+	int					nb_te;
 }					t_fillit;
 
 void			ft_error(char *str);
@@ -49,6 +51,6 @@ int				sq_len(int nb_te);
 char			*do_carre(int sq_area);
 int				place_error(t_ptr *cursor, char *carre, int start, int sq_area);
 char			*fill(int i, t_ptr *cursor, char *carre, int sq_area);
-char			*place_and_fill(int start, char *carre, int sq_area, t_ptr *cursor);
+char			*start_fill(int start, char *carre, int sq_area, t_ptr *cursor);
 
 #endif

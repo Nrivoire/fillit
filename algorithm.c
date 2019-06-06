@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 16:37:50 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/05 18:57:53 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/06 15:24:05 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,7 +30,9 @@ char			*do_carre(int sq_area)
 	return (carre);
 }
 
-int				place_error(t_ptr *cursor, char *carre, int start, int sq_area)
+#include <stdio.h>
+
+int				place_error(t_ptr *cursor, char *carre, int start, int sq_area) //regarde en fonction de start si la piece rentre
 {
 	int				y;
 	int				i;
@@ -59,7 +61,7 @@ int				place_error(t_ptr *cursor, char *carre, int start, int sq_area)
 	return (start);
 }
 
-char			*fill(int i, t_ptr *cursor, char *carre, int sq_area)
+char			*fill(int i, t_ptr *cursor, char *carre, int sq_area) //rempli le carre avec la piece verifier par place_error avant
 {
 	int				n;
 	int				y;
