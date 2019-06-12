@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 16:37:50 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/06 15:24:05 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/12 19:29:53 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,60 +30,67 @@ char			*do_carre(int sq_area)
 	return (carre);
 }
 
-#include <stdio.h>
-
-int				place_error(t_ptr *cursor, char *carre, int start, int sq_area) //regarde en fonction de start si la piece rentre
+char			*del_letter(char *carre, char letter)
 {
-	int				y;
 	int				i;
-	int				n;
-	int				x;
-	int				tmp_i;
+	char			tmp_letter;
 
-	i = start;
-	n = 2;
-	y = (int)cursor->t[1] - 48;
-	while (y > 0)
+	tmp_letter = letter;
+	tmp_letter--;
+	i = 0;
+	while (carre[i] != '\0')
 	{
-		x = (int)cursor->t[0] - 48;
-		tmp_i = i;
-		while (x > 0)
-		{
-			if (cursor->t[n] == '@' && carre[tmp_i] != '.')
-				return (-1);
-			n++;
-			tmp_i++;
-			x--;
-		}
-		i = i + sq_area;
-		y--;
-	}
-	return (start);
-}
-
-char			*fill(int i, t_ptr *cursor, char *carre, int sq_area) //rempli le carre avec la piece verifier par place_error avant
-{
-	int				n;
-	int				y;
-	int				x;
-	int				tmp_i;
-
-	n = 2;
-	y = (int)cursor->t[1] - 48;
-	while (y > 0)
-	{
-		x = (int)cursor->t[0] - 48;
-		tmp_i = i;
-		while (x > 0)
-		{
-			if (cursor->t[n] == '@' && carre[tmp_i] == '.')
-				carre[tmp_i] = cursor->letter;
-			tmp_i++;
-			n++;
-			x--;
-		}
-		i = i + sq_area;
-		y--;
+		if (carre[i] == tmp_letter)
+			carre[i] = '.';
+		i++;
 	}
 	return (carre);
+}
+
+int				place_error(t_fillit *some, int start)
+{
+	int				y;
+	int				n;
+	int				x;
+	int				tmp_i;
+
+	n = 2;
+	y = (int)some->begin_lst->t[1] - 48;
+	while (y-- > 0)
+	{
+		x = (int)some->begin_lst->t[0] - 48;
+		tmp_i = start;
+		while (x-- > 0)
+		{
+			if (some->begin_lst->t[n++] == '@' && some->carre[tmp_i] != '.')
+				return (-1);
+			tmp_i++;
+		}
+		start = start + some->sq_area;
+	}
+	return (0);
+}
+
+char			*fill(t_fillit *some, int start)
+{
+	int				n;
+	int				y;
+	int				x;
+	int				tmp_start;
+
+	n = 2;
+	y = (int)some->begin_lst->t[1] - 48;
+	while (y-- > 0)
+	{
+		x = (int)some->begin_lst->t[0] - 48;
+		tmp_start = start;
+		while (x-- > 0)
+		{
+			if (some->begin_lst->t[n++] == '@' && some->carre[tmp_start] == '.')
+				some->carre[tmp_start] = some->begin_lst->letter;
+			tmp_start++;
+		}
+		start = start + some->sq_area;
+	}
+	return (some->carre);
 }

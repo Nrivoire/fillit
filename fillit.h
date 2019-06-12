@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 15:21:45 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/06 15:21:47 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/12 19:25:31 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,33 +24,52 @@
 
 typedef struct		s_tetri
 {
-	char				*t;
-	char				letter;
-	struct s_tetri		*next;
+	char			*t;
+	char			letter;
+	struct s_tetri	*next;
 }					t_ptr;
 
 typedef struct		s_fillit
 {
-	char				*first[19];
-	char				*second[19];
-	char				*carre;
-	t_ptr				*begin_lst;
-	char				*tmp;
-	int					nb_te;
+	char			*first[19];
+	char			*second[19];
+	char			*carre;
+	t_ptr			*begin_lst;
+	char			*tmp;
+	int				nb_te;
+	int				sq_area;
 }					t_fillit;
 
-void			ft_error(char *str);
-int				check(char *buff);
-void			form(int s, char *buff);
-void			storage(t_fillit *some);
-void			possibilities(t_fillit *some);
-char			*compare(char *buff, t_fillit *some);
-t_ptr			*lstnew(void const *content, char letter);
-t_ptr			*addlst(t_ptr *begin_lst, void *data, char letter);
-int				sq_len(int nb_te);
-char			*do_carre(int sq_area);
-int				place_error(t_ptr *cursor, char *carre, int start, int sq_area);
-char			*fill(int i, t_ptr *cursor, char *carre, int sq_area);
-char			*start_fill(int start, char *carre, int sq_area, t_ptr *cursor);
+/*
+** main.c
+*/
+void				print(char *carre, int sq_len);
+int					optimization(t_fillit *some, char letter);
+t_fillit			*read_and_resolve(t_fillit *some, char **ac, int nb_te);
+
+/*
+** list.c
+*/
+t_ptr				*lstnew(void const *content, char letter);
+t_ptr				*addlst(t_ptr *begin_lst, void *data, char letter);
+void				storage(t_fillit *some);
+void				possibilities(t_fillit *some);
+char				*compare(char *buff, t_fillit *some);
+
+/*
+** algorithm.c
+*/
+int					sq_len(int nb_te);
+char				*do_carre(int sq_area);
+char				*del_letter(char *carre, char letter);
+int					place_error(t_fillit *some, int start);
+char				*fill(t_fillit *some, int start);
+
+/*
+** check.c
+*/
+void				ft_error(char *str);
+int					check(char *buff);
+void				form(int s, char *buff);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 15:22:14 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/05 18:46:51 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/12 19:26:28 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,13 +34,17 @@ t_ptr			*lstnew(void const *content, char letter)
 
 t_ptr			*addlst(t_ptr *begin_lst, void *data, char letter)
 {
-	t_ptr *new;
+	t_ptr	*new;
+	t_ptr	*tmp;
 
 	if (begin_lst != NULL)
 	{
 		new = lstnew(data, letter);
-		new->next = begin_lst;
-		begin_lst = new;
+		tmp = begin_lst;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new;
+		new->next = NULL;
 	}
 	else
 		begin_lst = lstnew(data, letter);
