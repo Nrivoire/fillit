@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   main.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: loatilem <loatilem@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 15:21:57 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/06 15:53:40 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/12 18:26:29 by loatilem    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,54 +36,47 @@ char			*del_letter(char *carre, char letter)
 	i = 0;
 	while (carre[i] != '\0')
 	{
-		if (carre[i] == letter - 1)
+		if (carre[i] == letter)
 			carre[i] = '.';
 		i++;
 	}
 	return (carre);
 }
 
-int				optimization(char letter, t_fillit *some, int start, int sq_area)
+int 		optimization(char *carre, int sq_area, char letter, t_fillit *some)
 {
-	t_ptr			*cursor;
+	int		start;
+	t_ptr	*lst_elem;
+	int		x;
 
-	while (letter <= some->begin_lst->letter)
-	{
-		cursor = some->begin_lst;
-		while (cursor->letter != letter)
-			cursor = cursor->next;
-		//printf("start = %d letter = %c\n", start, cursor->letter);
-		if (place_error(cursor, some->carre, start, sq_area) == -1)
+	lst_elem = some->begin_lst;
+	while (lst_elem->letter != letter)
+			lst_elem = lst_elem->next;
+	x = lst_elem->t[0] - 48;
+	start = 0;
+	while ((some->carre[start] != '\0'))
+	{	
+		if ((place_error(lst_elem, some->carre, start, sq_area) == -1 )|| ((start % sq_area) > (sq_area - x)))
+			;
+		else
 		{
-			printf("place_error = %d\n", place_error(cursor, some->carre, start, sq_area));
-			if (start > sq_area * sq_area && letter != 'A')
+			some->carre = fill(start, lst_elem, some->carre, sq_area);
+			if (lst_elem->letter == some->begin_lst->letter)
+				return (1);
+			letter++;
+			if(optimization(some->carre, sq_area, letter, some))
+				return (1);
+			else
 			{
-				//letter--;
-
-				del_letter(some->carre, letter--);
-				//printf("LETR = %c\n", letter);
-				printf("carre = %s\n\n", some->carre);
-				return (0);
-				//optimization(letter, some, start++, sq_area);
+				letter--;
+				some->carre = del_letter(some->carre, letter);
 			}
-			if (start > sq_area * sq_area && letter == 'A')
-			{
-				start = 0;
-				printf("start = %d\n", start);
-				return (-1);
-			}
-			printf("start = %d\n", start);
-			printf("LETTER = %c\n", letter);
-			
-			optimization(letter, some, start, sq_area);
-			start++;
 		}
-		start = place_error(cursor, some->carre, start, sq_area);
-		some->carre = fill(start, cursor, some->carre, sq_area);
-		letter++;
+		start++;
 	}
-	return (1);
+	return (0);
 }
+
 
 t_fillit			*read_and_resolve(t_fillit *some, char **ac, int nb_te)
 {
@@ -114,6 +107,7 @@ int				main(int av, char **ac)
 	int				enlarge;
 	t_fillit		*some;
 	int				start;
+	int				sq_area;
 
 	av = 2;
 	nb_te = 0;
@@ -122,13 +116,13 @@ int				main(int av, char **ac)
 	if (!(some = (t_fillit *)malloc(sizeof(t_fillit))))
 		return (0);
 	some = read_and_resolve(some, ac, nb_te);
-	some->carre = do_carre(sq_len(some->nb_te));
-	while (optimization('A', some, start, sq_len(some->nb_te + enlarge)) != 1 && enlarge <= 13)
-	{
-		printf("nb_tetri = %d\n", some->nb_te);
-		some->carre = do_carre(sq_len(some->nb_te + enlarge));
-		enlarge++;
+	sq_area = sq_len(some->nb_te);
+	some->carre = do_carre(sq_area);	
+	while ((optimization(some->carre, sq_area, 'A', some) != 1) && sq_area < 13)
+	{	
+		sq_area++;
+		some->carre = do_carre(sq_area);
 	}
-	print(some->carre, sq_len(some->nb_te + enlarge));
+	print(some->carre, sq_area);
 	return (0);
 }
