@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/13 16:48:10 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/14 12:51:45 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/14 14:49:32 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,20 +17,26 @@
 int				optimization(t_fillit *some, t_ptr *lst_elem)
 {
 	int		start;
+	int		x;
 
 	start = -1;
+	if (lst_elem == NULL)
+		return (1);
+	//print(some->carre, some->sq_area);
+	x = (int)lst_elem->t[0] - 48;
+	//usleep(300000);
+	//printf("\n");
 	while ((some->carre[++start] != '\0'))
 	{
 		if (!((place_error(lst_elem, some, start) == -1) ||
-			((start % some->sq_area) > (some->sq_area - some->begin_lst->x))))
+			((start % some->sq_area) > (some->sq_area - x))))
 		{
 			some->carre = fill(lst_elem, some, start);
-			if (lst_elem->next == NULL)
-				return (1);
+			//printf("%s\n\n", some->carre);
 			if (optimization(some, lst_elem->next))
 				return (1);
 			else
-				some->carre = del_letter(some->carre, some->begin_lst->letter);
+				some->carre = del_letter(some->carre, lst_elem->letter);
 		}
 	}
 	return (0);
@@ -56,7 +62,6 @@ t_fillit		*read_fillit(t_fillit *some, char **ac, int nb_te)
 	}
 	some->nb_te = nb_te;
 	some->sq_area = sq_len(some->nb_te);
-	some->begin_lst->x = some->begin_lst->t[0] - 48;
 	if (nb_te >= 27)
 		ft_error("error");
 	return (some);

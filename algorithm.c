@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 16:37:50 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/14 12:50:33 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/14 14:51:34 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -44,6 +44,8 @@ char			*del_letter(char *carre, char letter)
 	return (carre);
 }
 
+#include <stdio.h>
+
 int				place_error(t_ptr *lst_elem, t_fillit *some, int start)
 {
 	int				y;
@@ -59,9 +61,10 @@ int				place_error(t_ptr *lst_elem, t_fillit *some, int start)
 		tmp_i = start;
 		while (x-- > 0)
 		{
-			if (lst_elem->t[n++] == '@' && some->carre[tmp_i] != '.')
+			if (lst_elem->t[n] == '@' && some->carre[tmp_i] != '.')
 				return (-1);
 			tmp_i++;
+			n++;
 		}
 		start = start + some->sq_area;
 	}

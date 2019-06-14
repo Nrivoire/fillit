@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 15:21:45 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/14 12:49:35 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/14 14:37:20 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,7 +25,6 @@
 typedef struct		s_tetri
 {
 	char			*t;
-	int				x;
 	char			letter;
 	struct s_tetri	*next;
 }					t_ptr;
@@ -69,7 +68,7 @@ int					sq_len(int nb_te);
 char				*do_carre(int sq_area);
 char				*del_letter(char *carre, char letter);
 int					place_error(t_ptr *lst_elem, t_fillit *some, int start);
-char				*fill(t_ptr *cursor, t_fillit *some, int start);
+char				*fill(t_ptr *cursor, t_fillit *some, int startx);
 
 /*
 ** check.c
