@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 16:37:50 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/12 19:29:53 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/14 12:50:33 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,21 +33,18 @@ char			*do_carre(int sq_area)
 char			*del_letter(char *carre, char letter)
 {
 	int				i;
-	char			tmp_letter;
 
-	tmp_letter = letter;
-	tmp_letter--;
 	i = 0;
 	while (carre[i] != '\0')
 	{
-		if (carre[i] == tmp_letter)
+		if (carre[i] == letter)
 			carre[i] = '.';
 		i++;
 	}
 	return (carre);
 }
 
-int				place_error(t_fillit *some, int start)
+int				place_error(t_ptr *lst_elem, t_fillit *some, int start)
 {
 	int				y;
 	int				n;
@@ -55,14 +52,14 @@ int				place_error(t_fillit *some, int start)
 	int				tmp_i;
 
 	n = 2;
-	y = (int)some->begin_lst->t[1] - 48;
+	y = (int)lst_elem->t[1] - 48;
 	while (y-- > 0)
 	{
-		x = (int)some->begin_lst->t[0] - 48;
+		x = (int)lst_elem->t[0] - 48;
 		tmp_i = start;
 		while (x-- > 0)
 		{
-			if (some->begin_lst->t[n++] == '@' && some->carre[tmp_i] != '.')
+			if (lst_elem->t[n++] == '@' && some->carre[tmp_i] != '.')
 				return (-1);
 			tmp_i++;
 		}
@@ -71,24 +68,24 @@ int				place_error(t_fillit *some, int start)
 	return (0);
 }
 
-char			*fill(t_fillit *some, int start)
+char			*fill(t_ptr *cursor, t_fillit *some, int start)
 {
 	int				n;
 	int				y;
 	int				x;
-	int				tmp_start;
+	int				tmp_i;
 
 	n = 2;
-	y = (int)some->begin_lst->t[1] - 48;
+	y = (int)cursor->t[1] - 48;
 	while (y-- > 0)
 	{
-		x = (int)some->begin_lst->t[0] - 48;
-		tmp_start = start;
+		x = (int)cursor->t[0] - 48;
+		tmp_i = start;
 		while (x-- > 0)
 		{
-			if (some->begin_lst->t[n++] == '@' && some->carre[tmp_start] == '.')
-				some->carre[tmp_start] = some->begin_lst->letter;
-			tmp_start++;
+			if (cursor->t[n++] == '@' && some->carre[tmp_i] == '.')
+				some->carre[tmp_i] = cursor->letter;
+			tmp_i++;
 		}
 		start = start + some->sq_area;
 	}
