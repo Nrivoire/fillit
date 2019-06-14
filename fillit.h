@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 15:21:45 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/14 14:58:51 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/14 17:35:43 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,42 +34,42 @@ typedef struct		s_fillit
 {
 	char			*first[19];
 	char			*second[19];
-	char			*carre;
-	t_ptr			*begin_lst;
-	char			*tmp;
+	char			*square;
+	t_ptr			*lst;
 	int				nb_te;
 	int				sq_area;
+	int				map_size;
 }					t_fillit;
 
 /*
 ** main.c
 */
-void				print(char *carre, int sq_len);
+void				print(char *square, int sq_len);
 
 /*
 ** read.c
 */
 t_ptr				*seach_lst(t_fillit *some, char letter);
-int					optimization(t_fillit *some, t_ptr *lst_elem);
+int					optimization(t_fillit *some);
 t_fillit			*read_fillit(t_fillit *some, char **ac, int nb_te);
 
 /*
 ** list.c
 */
-t_ptr				*lstnew(void const *content, char letter);
-t_ptr				*addlst(t_ptr *begin_lst, int number, char letter);
+t_ptr				*addlst(t_ptr *lst, int number, char letter);
 void				storage(t_fillit *some);
 void				possibilities(t_fillit *some);
 int					compare(char *buff, t_fillit *some);
+void				lstdel(t_ptr *lst);
 
 /*
 ** algorithm.c
 */
 int					sq_len(int nb_te);
-char				*do_carre(int sq_area);
-char				*del_letter(char *carre, char letter);
-int					place_error(t_ptr *lst_elem, t_fillit *some, int start);
-char				*fill(t_ptr *cursor, t_fillit *some, int startx);
+char				*do_square(t_fillit *some);
+char				*del_letter(char *square, char letter);
+int					place_error(t_fillit *some, int start);
+void				fill(t_fillit *some, int start);
 
 /*
 ** check.c

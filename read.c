@@ -6,47 +6,36 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/13 16:48:10 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/14 15:34:03 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/14 17:35:43 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
-int				optimization(t_fillit *some, t_ptr *lst_elem)
+int				optimization(t_fillit *some)
 {
 	int		start;
 	int		x;
+	t_ptr	*tmp;
 
 	start = -1;
-	if (lst_elem == NULL)
+	if (!some->lst)
 		return (1);
-	//print(some->carre, some->sq_area);
-	x = (int)some->second[lst_elem->number][0] - 48;
-	//usleep(300000);
-	while ((some->carre[++start] != '\0'))
-	{
-		if (!((place_error(lst_elem, some, start) == -1) ||
+	x = (int)some->second[some->lst->number][0] - 48;
+	while ((some->square[++start] != '\0'))
+		if (!((place_error(some, start) == -1) ||
 			((start % some->sq_area) > (some->sq_area - x))))
 		{
-			some->carre = fill(lst_elem, some, start);
-			//printf("%s\n\n", some->carre);
-			if (optimization(some, lst_elem->next))
+			fill(some, start);
+			tmp = some->lst;
+			some->lst = some->lst->next;
+			if (optimization(some))
 				return (1);
-			else
-				some->carre = del_letter(some->carre, lst_elem->letter);
+			some->lst = tmp;
+			some->square = del_letter(some->square, some->lst->letter);
 		}
-	}
 	return (0);
-}
-
-void			print_lst(t_ptr *elem_lst)
-{
-	while (elem_lst != NULL)
-	{
-		elem_lst = elem_lst->next;
-	}
 }
 
 t_fillit		*read_fillit(t_fillit *some, char **ac, int nb_te)
@@ -54,19 +43,23 @@ t_fillit		*read_fillit(t_fillit *some, char **ac, int nb_te)
 	char			buff[BUFF_SIZE + 1];
 	int				ret;
 	int				fd;
+	char			*tmp;
 
-	fd = open(ac[1], O_RDONLY);
+	if ((fd = open(ac[1], O_RDONLY)) < 0)
+		ft_error("error");
 	possibilities(some);
 	while ((ret = read(fd, buff, BUFF_SIZE)) > 0 && nb_te < 27)
 	{
 		buff[ret] = '\0';
 		form(check(buff), buff);
-		some->tmp = ft_stractrim(buff, '\n');
-		some->begin_lst = addlst(some->begin_lst,
-						compare(some->tmp, some), 'A' + nb_te++);
-		free(some->tmp);
+		if (!(tmp = ft_stractrim(buff, '\n')))
+			ft_error("error");
+		some->lst = addlst(some->lst, 	\
+				compare(tmp, some), 'A' + nb_te++);
+		free(tmp);
 		read(fd, buff, 1);
 	}
+	close(fd);
 	some->nb_te = nb_te;
 	some->sq_area = sq_len(some->nb_te);
 	if (nb_te >= 27)

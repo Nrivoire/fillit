@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 15:22:14 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/14 15:11:34 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/14 17:35:43 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -60,27 +60,26 @@ void			possibilities(t_fillit *some)
 	storage(some);
 }
 
-t_ptr			*addlst(t_ptr *begin_lst, int number, char letter)
+t_ptr			*addlst(t_ptr *lst, int number, char letter)
 {
 	t_ptr	*new;
 	t_ptr	*tmp;
 
-
 	if (!(new = (t_ptr *)malloc(sizeof(t_ptr))))
-		return (NULL);
+		ft_error("error");
 	new->letter = letter;
 	new->number = number;
 	new->next = NULL;
-	if (begin_lst != NULL)
+	if (lst)
 	{
-		tmp = begin_lst;
-		while (tmp->next != NULL)
+		tmp = lst;
+		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
 	else
-		begin_lst = new;
-	return (begin_lst);
+		lst = new;
+	return (lst);
 }
 
 int				compare(char *buff, t_fillit *some)
@@ -93,4 +92,11 @@ int				compare(char *buff, t_fillit *some)
 			return (i);
 	ft_error("error");
 	return (0);
+}
+
+void			lstdel(t_ptr *lst)
+{
+	if (lst->next)
+		lstdel(lst->next);
+	free(lst);
 }

@@ -6,13 +6,12 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/08 20:59:50 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/02 15:22:55 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/14 15:49:05 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {

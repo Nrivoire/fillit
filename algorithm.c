@@ -6,13 +6,12 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 16:37:50 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/14 15:34:05 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/14 17:35:43 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
 int				sq_len(int nb_te)
 {
@@ -22,55 +21,52 @@ int				sq_len(int nb_te)
 	return (sq_len);
 }
 
-char			*do_carre(int sq_area)
+char			*do_square(t_fillit *some)
 {
-	char			*carre;
-
-	carre = ft_strnew(sq_area * sq_area);
-	ft_memset(carre, '.', (sq_area * sq_area));
-	return (carre);
+	if (!(some->square = ft_strnew(some->map_size)))
+		ft_error("error");
+	ft_memset(some->square, '.', some->map_size);
+	return (some->square);
 }
 
-char			*del_letter(char *carre, char letter)
+char			*del_letter(char *square, char letter)
 {
-	int				i;
+	int			i;
+	int			tmp;
 
-	i = 0;
-	while (carre[i] != '\0')
-	{
-		if (carre[i] == letter)
-			carre[i] = '.';
-		i++;
-	}
-	return (carre);
+	i = -1;
+	tmp = ft_strlen(square);
+	while (++i < tmp)
+		if (square[i] == letter)
+			square[i] = '.';
+	return (square);
 }
 
-int				place_error(t_ptr *lst_elem, t_fillit *some, int start)
+int				place_error(t_fillit *some, int start)
 {
 	int				y;
-	int				n;
+	size_t			n;
 	int				x;
 	int				tmp_i;
 
 	n = 2;
-	y = some->second[lst_elem->number][1] - 48;
+	y = some->second[some->lst->number][1] - 48;
 	while (y-- > 0)
 	{
-		x = some->second[lst_elem->number][0] - 48;
+		x = some->second[some->lst->number][0] - 48;
 		tmp_i = start;
 		while (x-- > 0)
-		{
-			if (some->second[lst_elem->number][n] == '@' && some->carre[tmp_i] != '.')
+			if ((some->second[some->lst->number][n++] == '@' 	\
+					&& (some->square[tmp_i] != '.')) 				\
+					|| tmp_i++ >= some->map_size)
 				return (-1);
-			tmp_i++;
-			n++;
-		}
-		start = start + some->sq_area;
+		if ((start += some->sq_area) > some->map_size)
+			start = some->map_size;
 	}
 	return (0);
 }
 
-char			*fill(t_ptr *cursor, t_fillit *some, int start)
+void			fill(t_fillit *some, int start)
 {
 	int				n;
 	int				y;
@@ -78,18 +74,18 @@ char			*fill(t_ptr *cursor, t_fillit *some, int start)
 	int				tmp_i;
 
 	n = 2;
-	y = some->second[cursor->number][1] - 48;
+	y = some->second[some->lst->number][1] - 48;
 	while (y-- > 0)
 	{
-		x = some->second[cursor->number][0] - 48;
+		x = some->second[some->lst->number][0] - 48;
 		tmp_i = start;
 		while (x-- > 0)
 		{
-			if (some->second[cursor->number][n++] == '@' && some->carre[tmp_i] == '.')
-				some->carre[tmp_i] = cursor->letter;
+			if (some->second[some->lst->number][n++] == '@' 	\
+					&& some->square[tmp_i] == '.')
+				some->square[tmp_i] = some->lst->letter;
 			tmp_i++;
 		}
-		start = start + some->sq_area;
+		start += some->sq_area;
 	}
-	return (some->carre);
 }
