@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/13 16:48:10 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/14 14:49:32 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/14 15:34:03 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,9 +23,8 @@ int				optimization(t_fillit *some, t_ptr *lst_elem)
 	if (lst_elem == NULL)
 		return (1);
 	//print(some->carre, some->sq_area);
-	x = (int)lst_elem->t[0] - 48;
+	x = (int)some->second[lst_elem->number][0] - 48;
 	//usleep(300000);
-	//printf("\n");
 	while ((some->carre[++start] != '\0'))
 	{
 		if (!((place_error(lst_elem, some, start) == -1) ||
@@ -40,6 +39,14 @@ int				optimization(t_fillit *some, t_ptr *lst_elem)
 		}
 	}
 	return (0);
+}
+
+void			print_lst(t_ptr *elem_lst)
+{
+	while (elem_lst != NULL)
+	{
+		elem_lst = elem_lst->next;
+	}
 }
 
 t_fillit		*read_fillit(t_fillit *some, char **ac, int nb_te)

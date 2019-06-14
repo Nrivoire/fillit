@@ -6,12 +6,13 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 16:37:50 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/14 14:51:34 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/14 15:34:05 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
 int				sq_len(int nb_te)
 {
@@ -44,8 +45,6 @@ char			*del_letter(char *carre, char letter)
 	return (carre);
 }
 
-#include <stdio.h>
-
 int				place_error(t_ptr *lst_elem, t_fillit *some, int start)
 {
 	int				y;
@@ -54,14 +53,14 @@ int				place_error(t_ptr *lst_elem, t_fillit *some, int start)
 	int				tmp_i;
 
 	n = 2;
-	y = (int)lst_elem->t[1] - 48;
+	y = some->second[lst_elem->number][1] - 48;
 	while (y-- > 0)
 	{
-		x = (int)lst_elem->t[0] - 48;
+		x = some->second[lst_elem->number][0] - 48;
 		tmp_i = start;
 		while (x-- > 0)
 		{
-			if (lst_elem->t[n] == '@' && some->carre[tmp_i] != '.')
+			if (some->second[lst_elem->number][n] == '@' && some->carre[tmp_i] != '.')
 				return (-1);
 			tmp_i++;
 			n++;
@@ -79,14 +78,14 @@ char			*fill(t_ptr *cursor, t_fillit *some, int start)
 	int				tmp_i;
 
 	n = 2;
-	y = (int)cursor->t[1] - 48;
+	y = some->second[cursor->number][1] - 48;
 	while (y-- > 0)
 	{
-		x = (int)cursor->t[0] - 48;
+		x = some->second[cursor->number][0] - 48;
 		tmp_i = start;
 		while (x-- > 0)
 		{
-			if (cursor->t[n++] == '@' && some->carre[tmp_i] == '.')
+			if (some->second[cursor->number][n++] == '@' && some->carre[tmp_i] == '.')
 				some->carre[tmp_i] = cursor->letter;
 			tmp_i++;
 		}

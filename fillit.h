@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 15:21:45 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/14 14:37:20 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/14 14:58:51 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,6 +26,7 @@ typedef struct		s_tetri
 {
 	char			*t;
 	char			letter;
+	int				number;
 	struct s_tetri	*next;
 }					t_ptr;
 
@@ -56,10 +57,10 @@ t_fillit			*read_fillit(t_fillit *some, char **ac, int nb_te);
 ** list.c
 */
 t_ptr				*lstnew(void const *content, char letter);
-t_ptr				*addlst(t_ptr *begin_lst, void *data, char letter);
+t_ptr				*addlst(t_ptr *begin_lst, int number, char letter);
 void				storage(t_fillit *some);
 void				possibilities(t_fillit *some);
-char				*compare(char *buff, t_fillit *some);
+int					compare(char *buff, t_fillit *some);
 
 /*
 ** algorithm.c

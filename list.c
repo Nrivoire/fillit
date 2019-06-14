@@ -6,50 +6,12 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 15:22:14 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/14 14:53:08 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/14 15:11:34 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-t_ptr			*lstnew(void const *content, char letter)
-{
-	t_ptr		*elem;
-
-	if (!(elem = (t_ptr *)malloc(sizeof(t_ptr))))
-		return (NULL);
-	if (content)
-	{
-		if (!(elem->t = (void *)malloc(sizeof(char) * 16)))
-			return (NULL);
-		ft_memcpy(elem->t, content, 21);
-		elem->letter = letter;
-	}
-	else
-		elem->t = NULL;
-	elem->next = NULL;
-	return (elem);
-}
-
-t_ptr			*addlst(t_ptr *begin_lst, void *data, char letter)
-{
-	t_ptr	*new;
-	t_ptr	*tmp;
-
-	if (begin_lst != NULL)
-	{
-		new = lstnew(data, letter);
-		tmp = begin_lst;
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = new;
-		new->next = NULL;
-	}
-	else
-		begin_lst = lstnew(data, letter);
-	return (begin_lst);
-}
 
 void			storage(t_fillit *some)
 {
@@ -98,19 +60,37 @@ void			possibilities(t_fillit *some)
 	storage(some);
 }
 
-char			*compare(char *buff, t_fillit *some)
+t_ptr			*addlst(t_ptr *begin_lst, int number, char letter)
+{
+	t_ptr	*new;
+	t_ptr	*tmp;
+
+
+	if (!(new = (t_ptr *)malloc(sizeof(t_ptr))))
+		return (NULL);
+	new->letter = letter;
+	new->number = number;
+	new->next = NULL;
+	if (begin_lst != NULL)
+	{
+		tmp = begin_lst;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
+	else
+		begin_lst = new;
+	return (begin_lst);
+}
+
+int				compare(char *buff, t_fillit *some)
 {
 	int				i;
 
-	i = 0;
-	while (i < 19)
-	{
+	i = -1;
+	while (++i < 19)
 		if (ft_strstr(buff, some->first[i]) != NULL)
-		{
-			buff = ft_strcpy(buff, some->second[i]);
-			break ;
-		}
-		i++;
-	}
-	return (buff);
+			return (i);
+	ft_error("error");
+	return (0);
 }
