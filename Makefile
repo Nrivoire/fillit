@@ -6,7 +6,7 @@
 #    By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/06/14 18:19:22 by nrivoire     #+#   ##    ##    #+#        #
-#    Updated: 2019/06/14 19:25:21 by nrivoire    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/06/17 20:05:31 by nrivoire    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -22,15 +22,10 @@
 NAME = fillit
 
 #	Sources
-# SRC_PATH = src
-# SRC_NAME = list.c read.c check.c algorithm.c main.c
-# SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 SRC = main.c list.c read.c check.c algorithm.c \
 
 #	Objects
-OBJ_PATH = obj
-OBJ_NAME = $(SRC_NAME:.c=.o)
-OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
+OBJ = $(SRC:.c=.o)
 
 #	Includes
 CPPFLAGS = -Iinclude
@@ -38,7 +33,7 @@ LDFLAGS = -Llibft
 LDLIBS = -lft
 
 #	Compiler
-CC = clang
+CC = gcc
 CFLAGS = -Wall -Werror -Wextra -I. -c
 
 ################
@@ -71,19 +66,17 @@ SUR=$ \x1b[7m
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@
+	@ $(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@
 
-$(OBJ_NAME)%.o: $(SRC)%.c
-	@mkdir $(OBJ) 2> /dev/null
-	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
-	@printf "\r $(BLUE) $(BOLD) [CC] $(END) $(<:.c=)..."
+%.o: %.c $(CPPFLAGS)
+	@$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
-	@echo "$(BOLD) $(RED) [DONE] $(END) MAKEFILE CLEANING"
 	@ /bin/rm -fv $(OBJ)
 
 fclean: clean
 	@ /bin/rm -fv $(NAME)
+	@echo "$(BOLD) $(RED) [DONE] $(END) MAKEFILE CLEANING"
 
 norme:
 	norminette $(SRC)
