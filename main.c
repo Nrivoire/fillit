@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 15:21:57 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/14 17:35:43 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/17 20:34:53 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,7 +46,7 @@ int				main(int av, char **ac)
 	tmp = some->lst;
 	while ((optimization(some) != 1) && some->sq_area < 13)
 	{
-		some->sq_area++;
+		some->map_size = ++some->sq_area * some->sq_area;
 		do_square(some);
 	}
 	lstdel(tmp);
