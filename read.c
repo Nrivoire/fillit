@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/13 16:48:10 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/14 17:35:43 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/17 20:48:44 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,7 +45,7 @@ t_fillit		*read_fillit(t_fillit *some, char **ac, int nb_te)
 	int				fd;
 	char			*tmp;
 
-	if ((fd = open(ac[1], O_RDONLY)) < 0)
+	if ((fd = open(ac[1], O_RDONLY)) < 0 || fd == open(ac[1], O_DIRECTORY))
 		ft_error("error");
 	possibilities(some);
 	while ((ret = read(fd, buff, BUFF_SIZE)) > 0 && nb_te < 27)

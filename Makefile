@@ -6,7 +6,7 @@
 #    By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/06/14 18:19:22 by nrivoire     #+#   ##    ##    #+#        #
-#    Updated: 2019/06/17 20:05:31 by nrivoire    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/06/17 20:51:37 by nrivoire    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -68,8 +68,9 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@ $(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@
 
-%.o: %.c $(CPPFLAGS)
+%.o: %.c libft/libft.h fillit.h
 	@$(CC) $(CFLAGS) -o $@ -c $<
+	@printf "\r $(PINK) $(BOLD) [CC] $(END) $(<:.c=)..."
 
 clean:
 	@ /bin/rm -fv $(OBJ)
