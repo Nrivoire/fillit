@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 15:21:45 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/17 20:51:04 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/17 21:43:50 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -75,7 +75,7 @@ void				fill(t_fillit *some, int start);
 ** check.c
 */
 void				ft_error(char *str);
-int					check(char *buff);
-void				form(int s, char *buff);
+void				check(char *buff);
+void				correct_form(char *buff);
 
 #endif
