@@ -6,7 +6,7 @@
 #    By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/06/14 18:19:22 by nrivoire     #+#   ##    ##    #+#        #
-#    Updated: 2019/06/18 12:02:08 by nrivoire    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/06/18 15:47:37 by nrivoire    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -65,16 +65,21 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@ $(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@
 
-%.o: %.c libft/libft.h fillit.h
+%.o: %.c libft/libft.h fillit.h libft.a
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@printf "\r $(PINK) $(BOLD) [CC] $(END) $(<:.c=)..."
+	@printf "\r $(PINK) $(BOLD) [COMPILE] $(END) $(<:.c=)..."
+
+libft.a:
+	@make -C ./libft/
 
 clean:
 	@ /bin/rm -fv $(OBJ)
+	@make -C ./libft/ clean
 
 fclean: clean
 	@ /bin/rm -fv $(NAME)
 	@echo "$(BOLD) $(RED) [DONE] $(END) MAKEFILE CLEANING"
+	@make -C ./libft/ fclean
 
 norme:
 	norminette $(SRC)

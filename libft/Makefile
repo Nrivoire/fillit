@@ -6,7 +6,7 @@
 #    By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/10/04 11:42:11 by vasalome     #+#   ##    ##    #+#        #
-#    Updated: 2019/06/14 19:18:38 by nrivoire    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/06/18 15:44:54 by nrivoire    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -87,7 +87,6 @@ $(NAME): $(OBJ)
 	@printf "\r $(PINK) $(BOLD) [CC] $(END) $(<:.c=)..."
 
 clean:
-	@echo "$(BOLD) $(GREEN) [DONE] $(END) MAKEFILE CLEANING"
 	@ /bin/rm -f $(OBJ)
 
 fclean: clean
