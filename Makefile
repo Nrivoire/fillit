@@ -6,13 +6,10 @@
 #    By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/06/14 18:19:22 by nrivoire     #+#   ##    ##    #+#        #
-#    Updated: 2019/06/17 20:51:37 by nrivoire    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/06/18 12:02:08 by nrivoire    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
-
-# empêche le Makefile de confondre un fichier et une règle en cas de même nom
-.PHONY: all clean fclean re
 
 #################
 ##  VARIABLES  ##
@@ -69,7 +66,7 @@ $(NAME): $(OBJ)
 	@ $(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@
 
 %.o: %.c libft/libft.h fillit.h
-	@$(CC) $(CFLAGS) -o $@ -c $<
+	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf "\r $(PINK) $(BOLD) [CC] $(END) $(<:.c=)..."
 
 clean:
@@ -84,3 +81,6 @@ norme:
 	norminette $(INC_PATH)*.h
 
 re: fclean all
+
+# empêche le Makefile de confondre un fichier et une règle en cas de même nom
+.PHONY: all clean fclean re

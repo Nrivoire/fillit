@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 16:29:06 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/17 21:44:25 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/17 21:46:28 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,8 +25,6 @@ void			check(char *buff)
 			&& ft_occur(buff, '\n') == 4))
 		ft_error("error");
 }
-
-#include <stdio.h>
 
 void			correct_form(char *buff)
 {
