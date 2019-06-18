@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/13 16:48:10 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/18 15:48:12 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/18 17:36:38 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -57,12 +57,11 @@ t_fillit		*read_fillit(t_fillit *some, char **ac, int nb_te)
 			ft_error("error");
 		some->lst = addlst(some->lst, compare(tmp, some), 'A' + nb_te++);
 		free(tmp);
-		read(fd, buff, 1);
 	}
 	close(fd);
 	some->nb_te = nb_te;
 	some->sq_area = sq_len(some->nb_te);
-	if (nb_te >= 27)
+	if (nb_te >= 27 || ft_strlen(buff) != 20)
 		ft_error("error");
 	return (some);
 }

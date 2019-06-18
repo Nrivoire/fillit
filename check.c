@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 16:29:06 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/17 21:46:28 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/18 17:36:33 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,7 +22,7 @@ void			ft_error(char *str)
 void			check(char *buff)
 {
 	if (!(ft_occur(buff, '.') == 12 && ft_occur(buff, '#') == 4 	\
-			&& ft_occur(buff, '\n') == 4))
+			&& (ft_occur(buff, '\n') == 4 || ft_occur(buff, '\n') == 5)))
 		ft_error("error");
 }
 
@@ -33,7 +33,7 @@ void			correct_form(char *buff)
 
 	n = 1;
 	s = 0;
-	if (buff[s] == '\n')
+	while (buff[s])
 	{
 		if (s + 5 < 20 && buff[s + 5] == '\n')
 			n++;

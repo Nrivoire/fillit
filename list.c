@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 15:22:14 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/17 21:36:15 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/18 18:15:05 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,7 +55,7 @@ void			possibilities(t_fillit *some)
 	some->first[14] = "##.##";
 	some->first[15] = "#..###";
 	some->first[16] = "#...##..#";
-	some->first[17] = "###..##";
+	some->first[17] = "###..#";
 	some->first[18] = "#..##...#";
 	storage(some);
 }

@@ -6,7 +6,7 @@
 #    By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/06/14 18:19:22 by nrivoire     #+#   ##    ##    #+#        #
-#    Updated: 2019/06/18 15:47:37 by nrivoire    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/06/18 17:40:50 by nrivoire    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -31,7 +31,7 @@ LDLIBS = -lft
 
 #	Compiler
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -I. -c
+CFLAGS = -Wall -Werror -Wextra -I.
 
 ################
 ##   COLORS   ##
@@ -60,25 +60,27 @@ SUR=$ \x1b[7m
 # $^ -> représente tout ce qui est apres le :
 # $< -> nom de la dependance
 
-all: $(NAME)
+all: libft_make $(NAME)
+
 
 $(NAME): $(OBJ)
 	@ $(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@
+	@printf "\n"
 
-%.o: %.c libft/libft.h fillit.h libft.a
+%.o: %.c libft/libft.h fillit.h libft/libft.a
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@printf "\r $(PINK) $(BOLD) [COMPILE] $(END) $(<:.c=)..."
+	@printf "\r$(PINK)$(BOLD)[COMPILE] $(END) $(<:.c=)..."
 
-libft.a:
+libft_make:
 	@make -C ./libft/
 
 clean:
-	@ /bin/rm -fv $(OBJ)
+	@ /bin/rm -f $(OBJ)
 	@make -C ./libft/ clean
 
 fclean: clean
-	@ /bin/rm -fv $(NAME)
-	@echo "$(BOLD) $(RED) [DONE] $(END) MAKEFILE CLEANING"
+	@ /bin/rm -f $(NAME)
+	@echo "$(BOLD)$(RED)[DONE] $(END) MAKEFILE CLEANING"
 	@make -C ./libft/ fclean
 
 norme:

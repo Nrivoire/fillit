@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 15:21:45 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/17 21:43:50 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/18 17:24:41 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,7 +14,7 @@
 #ifndef FILLIT_H
 # define FILLIT_H
 
-# define BUFF_SIZE 20
+# define BUFF_SIZE 21
 
 # include <unistd.h>
 # include <stdlib.h>
