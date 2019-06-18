@@ -6,7 +6,7 @@
 #    By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/06/14 18:19:22 by nrivoire     #+#   ##    ##    #+#        #
-#    Updated: 2019/06/18 17:40:50 by nrivoire    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/06/18 18:24:12 by nrivoire    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -60,10 +60,10 @@ SUR=$ \x1b[7m
 # $^ -> représente tout ce qui est apres le :
 # $< -> nom de la dependance
 
-all: libft_make $(NAME)
-
+all: $(NAME)
 
 $(NAME): $(OBJ)
+	@make -C ./libft/
 	@ $(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@
 	@printf "\n"
 
