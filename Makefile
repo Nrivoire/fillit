@@ -6,7 +6,7 @@
 #    By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/06/14 18:19:22 by nrivoire     #+#   ##    ##    #+#        #
-#    Updated: 2019/06/18 18:24:12 by nrivoire    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/06/18 19:30:20 by nrivoire    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -67,9 +67,9 @@ $(NAME): $(OBJ)
 	@ $(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@
 	@printf "\n"
 
-%.o: %.c libft/libft.h fillit.h libft/libft.a
-	@$(CC) $(CFLAGS) -c $< -o $@
-	@printf "\r$(PINK)$(BOLD)[COMPILE] $(END) $(<:.c=)..."
+%.o: %.c libft/libft.h fillit.h
+	@$(CC) $(CFLAGS) -o $@ -c $<
+	@printf "\r$(PINK)$(BOLD)[COMPILE] $(END) $(<:.c=)...\n"
 
 libft_make:
 	@make -C ./libft/
