@@ -6,7 +6,7 @@
 /*   By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 16:29:06 by nrivoire     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/18 18:45:39 by nrivoire    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/19 18:46:11 by nrivoire    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,11 +30,9 @@ void			correct_form(char *buff)
 {
 	int		n;
 	int		s;
-	int		c;
 
 	n = 1;
 	s = 0;
-	c = 0;
 	while (buff[s])
 	{
 		if (buff[s] == '\n' && s + 5 < 20 && buff[s + 5] == '\n')
