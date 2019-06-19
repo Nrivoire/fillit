@@ -6,7 +6,7 @@
 #    By: nrivoire <nrivoire@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/06/14 18:19:22 by nrivoire     #+#   ##    ##    #+#        #
-#    Updated: 2019/06/18 19:30:20 by nrivoire    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/06/19 12:00:05 by nrivoire    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -69,7 +69,7 @@ $(NAME): $(OBJ)
 
 %.o: %.c libft/libft.h fillit.h
 	@$(CC) $(CFLAGS) -o $@ -c $<
-	@printf "\r$(PINK)$(BOLD)[COMPILE] $(END) $(<:.c=)...\n"
+	@printf "\r$(PINK)$(BOLD)[COMPILE] $(END) $(<:.c=)..."
 
 libft_make:
 	@make -C ./libft/
